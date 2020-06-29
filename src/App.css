@@ -1,0 +1,8 @@
+.img {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+  background-image: url(../../static/assets/imgs/coin.png)
+}
