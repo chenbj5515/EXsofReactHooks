@@ -1,24 +1,11 @@
 /* eslint-disable */
 
-import React, {useState} from 'react';
+import React from 'react';
+import Demo from './latest_value_demos/demo02'
 
-
-function Name({name}) {
-  console.log('child rerender')
-  return (
-    <div>{name}</div>
-  )
-}
 function App(){
-  const [count, setcount] = useState(0);
-  const [name, setname] = useState('chenbj');
   return (
-      <div>
-        <div onClick={() => setcount(count + 1)}>点我刷新数字</div>
-        <div onClick={() => setname(name + "1")}>点我刷新名字</div>
-        <div>计数{count}</div>
-        <Name name={name}/>
-      </div>
+    <Demo />
   )
 }
 

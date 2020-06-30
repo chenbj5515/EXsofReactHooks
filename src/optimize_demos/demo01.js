@@ -1,5 +1,6 @@
 /* eslint-disable */
-
+// 点击刷新名字，子组件要渲染的name数据更新，rerender没有问题
+// 但是点击刷新数字，count更新，但是count和子组件一点关系也没有，子组件完全不需要渲染，但是可以看到还是会渲染，这就是我们要避免的不必要渲染
 import React, {useState} from 'react';
 
 
