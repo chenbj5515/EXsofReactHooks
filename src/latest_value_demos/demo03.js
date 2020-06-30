@@ -1,5 +1,5 @@
 /* eslint-disable */
-// 先点击“点我5s后弹出count”，再点击"点我增加count"，会发现alert的并不是最新值
+// useReducer会创建一个每次rerender产生的作用域之间公用的变量，通过dispatch修改也是能触发rerender的
 import React, {useReducer} from 'react';
 
 function App(){
