@@ -1,5 +1,6 @@
 /* eslint-disable */
-// useReducer会创建一个每次rerender产生的作用域之间公用的变量，通过dispatch修改也是能触发rerender的
+// count变更引发了useEffect的回调中的effect
+// 如果这个effect是再次更新count,那么最终你可能会看到两次渲染（从表象上来看就是闪烁）
 import React, {useState, useEffect, useLayoutEffect} from 'react';
 
 function App() {
