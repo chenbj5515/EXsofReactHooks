@@ -9,21 +9,21 @@
 import React, { useRef, useState } from 'react';
 
 function useEventEmitter() {
-    let callback = null;
-    const useSubscription = cb => {
+    let callback: (() => void) | null = null;
+    const useSubscription = (cb: (() => void) | null) => {
         callback = cb;
     }
     return {
         emit: () => {
-            callback();
+          callback && callback();
         },
         useSubscription
     }
 }
 
-let MessageBox = function (props) {
-    console.log('rerender');
-    
+// let MessageBox = function ;
+let MessageBox = React.memo((props: any) => {
+  console.log('rerender');
   return (
     <div style={{ paddingBottom: 24 }}>
       <p>You received a message</p>
@@ -37,10 +37,9 @@ let MessageBox = function (props) {
       </button>
     </div>
   );
-};
-MessageBox = React.memo(MessageBox);
+});
 
-const InputBox = function (props) {
+const InputBox = function (props: any) {
   const inputRef = useRef<any>();
   props.focus$.useSubscription(() => {
     inputRef.current.focus();

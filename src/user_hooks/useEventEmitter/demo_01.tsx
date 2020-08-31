@@ -10,26 +10,26 @@ import React, { useRef, useState } from 'react';
 import { useEventEmitter } from 'ahooks';
 
 
-let MessageBox = function (props) {
-    console.log('rerender');
-    
-  return (
-    <div style={{ paddingBottom: 24 }}>
-      <p>You received a message</p>
-      <button
-        type="button"
-        onClick={() => {
-          props.focus$.emit();
-        }}
-      >
-        Reply
-      </button>
-    </div>
-  );
-};
-MessageBox = React.memo(MessageBox);
+// let MessageBox = function ;
+let MessageBox = React.memo((props: any ) => {
+  console.log('rerender');
+  
+return (
+  <div style={{ paddingBottom: 24 }}>
+    <p>You received a message</p>
+    <button
+      type="button"
+      onClick={() => {
+        props.focus$.emit();
+      }}
+    >
+      Reply
+    </button>
+  </div>
+);
+});
 
-const InputBox = function (props) {
+const InputBox = function (props: any) {
   const inputRef = useRef<any>();
   props.focus$.useSubscription(() => {
     inputRef.current.focus();

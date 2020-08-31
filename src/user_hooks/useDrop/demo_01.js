@@ -6,8 +6,7 @@
  * desc.zh-CN: 拖拽区域可以接受文件，链接，文字，和下方的 box 节点。
  */
 
-import React, { useState } from 'react';
-import { useDrop, useDrag } from 'ahooks';
+import React from 'react';
 import './demo_01.css';
 
 export default () => {

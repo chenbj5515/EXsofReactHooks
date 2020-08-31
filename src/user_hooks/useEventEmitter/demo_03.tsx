@@ -9,47 +9,48 @@
 import React, { useRef, useState, useEffect } from 'react';
 
 function useEventEmitter() {
-    const subsRef = useRef(new Set<Function>());
-    const useSubscription = cb => {
+    const subsRef = useRef<Set<Function>>();
+    const useSubscription = (cb: () => void) => {
         function sub () {
             cb();
         }
         useEffect(() => {
-            subsRef.current.add(sub);
+          subsRef.current && subsRef.current.add(sub);
             return () => {
-                subsRef.current.delete(sub);
+              subsRef.current && subsRef.current.delete(sub);
             };
         }, []);
     }
     return {
         emit: () => {
+          if (subsRef.current) {
             for (const sub of subsRef.current) {
-                sub();
+              sub();
             }
+          }
         },
         useSubscription
     }
 }
 
-let MessageBox = function (props) {
-    console.log('rerender');
-    return (
-      <div style={{ paddingBottom: 24 }}>
-        <p>You received a message</p>
-        <button
-          type="button"
-          onClick={() => {
-            props.focus$.emit();
-          }}
-        >
-          Reply
-        </button>
-      </div>
-    );
-};
-MessageBox = React.memo(MessageBox);
+let MessageBox = React.memo((props: any) => {
+  console.log('rerender'); 
+  return (
+    <div style={{ paddingBottom: 24 }}>
+      <p>You received a message</p>
+      <button
+        type="button"
+        onClick={() => {
+          props.focus$.emit();
+        }}
+      >
+        Reply
+      </button>
+    </div>
+  );
+});
 
-const InputBox = function (props) {
+const InputBox = function (props: any) {
     const inputRef = useRef<any>();
     props.focus$.useSubscription(() => {
       inputRef.current.focus();
@@ -59,7 +60,7 @@ const InputBox = function (props) {
     );
 };
 
-const Input2 = function (props) {
+const Input2 = function (props: any) {
     props.focus$.useSubscription(() => {
       console.log('另一个订阅者的响应');
     });

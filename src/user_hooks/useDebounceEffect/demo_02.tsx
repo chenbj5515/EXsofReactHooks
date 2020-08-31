@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import debounce from 'lodash.debounce';
 
-function useDebounceEffect(effect, deps, options) {
-    const debouncedEffect = useRef<Function>();
+function useDebounceEffect(effect: () => void, deps: React.DependencyList | undefined, options: {wait: number}) {
+    const debouncedEffect = useRef<Function>(() => {});
     const wait = options?.wait ?? 1000;
     useEffect(() => {
-        debouncedEffect.current = debounce(effect, wait, options);
+        debouncedEffect.current = debounce(effect, wait);
     }, []);
     useEffect(() => {
         debouncedEffect.current();

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import debounce from 'lodash.debounce';
 
-function useDebounceEffect(effect, deps, options) {
+function useDebounceEffect(effect: () => void, deps: React.DependencyList | undefined, options: {wait: number}) {
   const wait = options?.wait ?? 1000;
-  useEffect(debounce(effect, wait, options) as () => void, deps);
+  useEffect(debounce(effect, wait) as () => void, deps);
 }
 export default () => {
   const [value, setValue] = useState('hello');

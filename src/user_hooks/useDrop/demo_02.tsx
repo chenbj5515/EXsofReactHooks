@@ -37,7 +37,7 @@ interface DropState {
 
 function useDrag(config: IConfig): [DragProps, DragState] {
     const [isDragging, setisDragging] = useState(false);
-    const getDragProps = data => {
+    const getDragProps = (data: any) => {
         return {
             key: JSON.stringify(data),
             draggable: true,
@@ -59,7 +59,7 @@ function useDrag(config: IConfig): [DragProps, DragState] {
     return [getDragProps, { isDragging }];
 }
 
-function useDrop(cb): [DropProps, DropState] {
+function useDrop(cb: { (data: any): void; (arg0: string): void; }): [DropProps, DropState] {
     const [isHovering, setIsHovering] = useState(false);
     const props = {
         onDragOver: (e: React.DragEvent) => {
@@ -82,7 +82,7 @@ function useDrop(cb): [DropProps, DropState] {
 
 export default () => {
   const [getDragProps, { isDragging }] = useDrag({});
-  const [props, { isHovering }] = useDrop(data => {
+  const [props, { isHovering }] = useDrop((data: any) => {
       console.log(data, '拖拽元素的信息')
   });
   return (
