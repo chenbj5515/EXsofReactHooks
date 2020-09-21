@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React, { useState, useEffect, useMemo, useRef, useReducer } from 'react';
 import debounce from 'lodash.debounce';
 
 function useDebounceEffect(effect: Function, deps: React.DependencyList | undefined, options: {wait: number}) {
@@ -17,10 +17,20 @@ function useDebounceEffect(effect: Function, deps: React.DependencyList | undefi
 }
 export default () => {
   const [value, setValue] = useState('hello');
-  const [records, setRecords] = useState<string[]>([]);
+  const reducer = (state: any, action: { type: string; }) => {
+    switch (action.type) {
+      case 'add':
+        return [...state, value]
+      default: 
+        return [...state, value]
+    }
+  }
+  const [records, dispatch] = useReducer(reducer, []);
+  // const [records, setRecords] = useState<string[]>([]);
   useDebounceEffect(
     () => {
-      setRecords((val) => [...val, value]);
+      dispatch({type: 'assign'});
+      // setRecords((val) => [...val, value]);
     },
     [value],
     {

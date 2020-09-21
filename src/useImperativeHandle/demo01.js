@@ -1,4 +1,3 @@
-/* eslint-disable */
 // 使用useRef获取DOM元素
 import React, {useRef} from 'react';
 
@@ -15,7 +14,6 @@ function App() {
         </>
     );
 }
-
 
 export default App;
 

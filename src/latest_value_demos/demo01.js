@@ -1,4 +1,3 @@
-/* eslint-disable */
 // 先点击“点我5s后弹出count”，再点击"点我增加count"，会发现alert的并不是最新值
 import React, {useState} from 'react';
 

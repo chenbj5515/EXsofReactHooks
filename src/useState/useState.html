@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="addBtn">click me to add count</div>
+    <div class="count"></div>
+    <div></div>
+    <script>
+        let count = 0;
+        function useState() {
+            return [
+                count,
+                function setState(currentCount) {
+                    count = currentCount;
+                    App();
+                }
+            ]
+        }
+        function App() {
+            const [count, setCount] = useState();
+            document.querySelector('.addBtn').onclick = () => {
+                setCount(count + 1);
+            }
+            document.querySelector('.count').innerHTML = count;
+        }
+        App();
+    </script>
+</body>
+</html>

@@ -1,14 +1,32 @@
-/* eslint-disable */
 
-import React from 'react';
-// import Demo from './useImperativeHandle/demo02'
-import Demo from './user_hooks/useDebounceEffect/demo_02'
+import React, { useState } from 'react';
+import { createContainer } from "unstated-next"
 
-function App(){
+function useCounter() {
+  let [count, setCount] = useState(0)
+  let decrement = () => setCount(count - 1)
+  let increment = () => setCount(count + 1)
+  return { count, decrement, increment }
+}
+
+let Counter = createContainer(useCounter)
+
+function CounterDisplay() {
+  let counter = Counter.useContainer()
   return (
-    <Demo />
+    <div>
+      <button onClick={counter.decrement}>-</button>
+      <p>You clicked {counter.count} times</p>
+      <button onClick={counter.increment}>+</button>
+    </div>
   )
 }
 
-export default App;
-
+export default function App() {
+  return (
+    <Counter.Provider>
+      <CounterDisplay />
+      <CounterDisplay />
+    </Counter.Provider>
+  )
+}

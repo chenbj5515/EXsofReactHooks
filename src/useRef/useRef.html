@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="addBtn">点我增加count</div>
+    <div class="count"></div>
+    <div class="logBtn">点我3s后弹出count</div>
+    <div></div>
+    <script>
+        let ref = {};
+        function useRef(initialVal) {
+            ref.current = ref.current ? ref.current : initialVal;
+            return ref;
+        }
+        function App() {
+            const countRef = useRef(0);
+            document.querySelector('.addBtn').onclick = () => {
+                countRef.current++;
+            }
+            document.querySelector('.logBtn').onclick = () => {
+                setTimeout(() => {
+                    alert(countRef.current);
+                }, 3000);
+            }
+            document.querySelector('.count').innerHTML = `当前最新值为：${countRef.current}`;
+        }
+        App();
+    </script>
+</body>
+</html>
